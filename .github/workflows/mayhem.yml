@@ -9,7 +9,6 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   DIVMOD_MAYHEMFILE: Mayhem/div_mod.mayhemfile
   DIVMODWORD_MAYHEMFILE: Mayhem/div_mod_word.mayhemfile
-  ISQRT_MAYHEMFILE: Mayhem/isqrt.mayhemfile
 
 jobs:
   build:
@@ -60,13 +59,6 @@ jobs:
         with:
           mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
           args: --image ${{ steps.meta.outputs.tags }} --file ${{ env.DIVMODWORD_MAYHEMFILE }} --duration 300
-          sarif-output: sarif
-
-      - name: Start analysis for isqrt
-        uses: ForAllSecure/mcode-action@v1
-        with:
-          mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
-          args: --image ${{ steps.meta.outputs.tags }} --file ${{ env.ISQRT_MAYHEMFILE }} --duration 300
           sarif-output: sarif
 
       - name: Upload SARIF file(s)
